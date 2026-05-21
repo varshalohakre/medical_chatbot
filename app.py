@@ -47,6 +47,10 @@ rag_chain = create_retrieval_chain(retriever,question_answer_chain)
 def index():
     return render_template('chat.html')
 
+# ✅ Added: Render uses this to check if app is running
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"}), 200
 
 @app.route("/get",methods=["GET","POST"])
 def chat():
@@ -59,4 +63,5 @@ def chat():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=5001,debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0",port=port,debug=False)

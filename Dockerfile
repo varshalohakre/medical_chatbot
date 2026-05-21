@@ -2,10 +2,15 @@ FROM python:3.10-slim-buster
 
 WORKDIR /app
 
-COPY . /app
+# Copy requirements first for better layer caching
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r requirements.txt
+# Copy rest of the code
+COPY . .
 
-CMD ["python3","app.py"]
+EXPOSE 10000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:10000", "--workers", "2", "--timeout", "120", "app:app"]
 
 
