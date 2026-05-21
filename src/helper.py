@@ -1,8 +1,7 @@
-from langchain.document_loaders import PyPDFLoader,DirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader,DirectoryLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from typing import List
 from langchain.schema import Document
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_huggingface import HuggingFaceEmbeddings
 #extract text from pdf files
 def load_pdf_files(data):
