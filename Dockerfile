@@ -1,19 +1,4 @@
-FROM python:3.10-slim-buster
-
-#WORKDIR /app
-
-# Copy requirements first for better layer caching
-#COPY requirements.txt .
-#RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy rest of the code
-#COPY . .
-
-#EXPOSE 10000
-
-#CMD ["gunicorn", "--bind", "0.0.0.0:10000", "--workers", "2", "--timeout", "120", "app:app"]
-
-
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -27,4 +12,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 app:app
+CMD gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 300 app:app
+
